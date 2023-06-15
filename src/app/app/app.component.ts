@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mi aplicacion 23';
+
+  onUserSelect(user: User): void {
+    console.log(
+      `AppComponent: Se ha seleccionado el usuario ${user.name} con rol: ${user.role}`
+    );
+  }
 }

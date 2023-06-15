@@ -1,2 +1,16 @@
 <h1 class="titular">{{ title }}</h1>
 <p>Un parrafo: {{ 1 + 2 * 3 }}</p>
+
+<app-user-profile
+  firstName="Jesica"
+  lastName="Alba"
+  role="Admin"
+  (selected)="onUserSelect($event)"
+></app-user-profile>
+
+<app-user-profile
+  firstName="Laura"
+  lastName="Perez"
+  role="Operador"
+  (selected)="onUserSelect($event)"
+></app-user-profile>

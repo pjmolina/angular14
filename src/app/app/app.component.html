@@ -1,16 +1,28 @@
 <h1 class="titular">{{ title }}</h1>
 <p>Un parrafo: {{ 1 + 2 * 3 }}</p>
 
-<app-user-profile
-  firstName="Jesica"
-  lastName="Alba"
-  role="Admin"
+<div>
+  <h2>Listado de personas</h2>
+  <app-user-profile
+    *ngFor="let p of personas"
+    [firstName]="p.firstName"
+    [lastName]="p.lastName"
+    [role]="p.role"
+    (selected)="onUserSelect($event)"
+  >
+  </app-user-profile>
+</div>
+
+<!-- <app-user-profile
+  [firstName]="personas[0].firstName"
+  [lastName]="personas[0].lastName"
+  [role]="personas[0].role"
   (selected)="onUserSelect($event)"
 ></app-user-profile>
 
 <app-user-profile
-  firstName="Laura"
-  lastName="Perez"
-  role="Operador"
+  [firstName]="personas[1].firstName"
+  [lastName]="personas[1].lastName"
+  [role]="personas[1].role"
   (selected)="onUserSelect($event)"
-></app-user-profile>
+></app-user-profile> -->

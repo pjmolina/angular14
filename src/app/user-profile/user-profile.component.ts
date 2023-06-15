@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 export interface User {
   name: string;
@@ -10,12 +19,28 @@ export interface User {
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit, OnDestroy, OnChanges {
   @Input() firstName: string = '';
   @Input() lastName: string = '';
   @Input() role: string = '';
 
   @Output() selected = new EventEmitter<User>();
+
+  constructor() {
+    console.log('userProfile. 1. constructor');
+  }
+
+  ngOnInit(): void {
+    console.log('userProfile. 2. ngOnInit');
+  }
+
+  ngOnDestroy(): void {
+    console.log('userProfile. 9. ngOnDestroy');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
 
   seleccionar() {
     // const nombreCompleto = this.firstName + ' ' + this.lastName;

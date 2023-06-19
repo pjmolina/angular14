@@ -14,6 +14,11 @@ export interface User {
   role: string;
 }
 
+export enum Roles {
+  Admin = 'Admin',
+  Operador = 'Operador',
+}
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -28,6 +33,10 @@ export class UserProfileComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor() {
     console.log('userProfile. 1. constructor');
+  }
+
+  get isAdmin(): boolean {
+    return this.role === Roles.Admin;
   }
 
   ngOnInit(): void {

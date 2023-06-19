@@ -3,7 +3,9 @@
 </ng-template>
 
 <div class="user-profile">
-  <span class="name">{{ firstName }} {{ lastName }}</span>
+  <!-- <span class="name">{{ firstName }} {{ lastName }}</span> -->
+  <input [(ngModel)]="firstName" placeholder="nombre" />
+  <input [(ngModel)]="lastName" placeholder="apellido" />
   <span class="role">({{ role }})</span>
   <button (click)="seleccionar()">Seleccionar</button>
   <br />

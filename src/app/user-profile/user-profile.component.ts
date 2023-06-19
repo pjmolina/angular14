@@ -8,6 +8,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { LoggerService } from '../services/logger.service';
 
 export interface User {
   name: string;
@@ -23,6 +24,7 @@ export enum Roles {
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
+  // providers: [LoggerService],  // si inyectamos el servicio aqui -> hay uca copia de ca servcio por componente
 })
 export class UserProfileComponent implements OnInit, OnDestroy, OnChanges {
   @Input() firstName: string = '';
@@ -31,8 +33,8 @@ export class UserProfileComponent implements OnInit, OnDestroy, OnChanges {
 
   @Output() selected = new EventEmitter<User>();
 
-  constructor() {
-    console.log('userProfile. 1. constructor');
+  constructor(private logger: LoggerService) {
+    this.logger.log('userProfile. 1. constructor');
   }
 
   get isAdmin(): boolean {
@@ -40,22 +42,22 @@ export class UserProfileComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log('userProfile. 2. ngOnInit');
+    this.logger.log('userProfile. 2. ngOnInit');
   }
 
   ngOnDestroy(): void {
-    console.log('userProfile. 9. ngOnDestroy');
+    this.logger.log('userProfile. 9. ngOnDestroy');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    this.logger.log(changes);
   }
 
   seleccionar() {
     // const nombreCompleto = this.firstName + ' ' + this.lastName;
     const nombreCompleto = `${this.firstName} ${this.lastName}`;
 
-    console.log(nombreCompleto);
+    this.logger.log(nombreCompleto);
 
     this.selected.emit({
       name: nombreCompleto,

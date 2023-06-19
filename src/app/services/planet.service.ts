@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { DataPage } from '../domain/data-page';
 import { Planet, PlanetDto } from '../domain/planet';
 
@@ -26,6 +26,8 @@ export class PlanetService {
         })
       );
   }
+  //  HTTP   ---A--|
+  //   WS    --A-B----c---D----|
 }
 
 function toPlanet(dto: PlanetDto): Planet {
@@ -56,4 +58,15 @@ function toPlanet(dto: PlanetDto): Planet {
     .subscribe(datos, error, done)  // consumidor
 
   iterador / subscriptor / programacion funcional
+*/
+
+/*
+    getPlanets() : Observable(Planet[])
+      getPerson()     Observable(Person[])
+         getSpaceship()  Observable(Spaceship[])
+
+     getPlanets().concatMap(p =>   getPerson()).concatMap().getPerson().
+
+     subscribe(next: (data) => p, p, n)
+
 */

@@ -20,6 +20,7 @@ interface Persona {
 export class AppComponent implements OnInit {
   title = 'mi aplicacion 23';
   objeto: Person | Planet | Compuesto | undefined | unknown = undefined;
+  dinero = 12345.678;
 
   personas: Persona[] = [
     {

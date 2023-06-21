@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClient } from '@angular/common/http';
@@ -26,8 +29,8 @@ describe('PlanetListComponent', () => {
       declarations: [PlanetListComponent],
       providers: [
         { provide: PlanetService, useClass: PlanetServiceMock },
-        { provide: HttpClient, useClass: HttpClientMock },
-      ],
+        { provide: HttpClient, useClass: HttpClientMock }
+      ]
     });
     fixture = TestBed.createComponent(PlanetListComponent);
     component = fixture.componentInstance;

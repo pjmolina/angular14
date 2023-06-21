@@ -10,13 +10,13 @@ export class LoggerService {
     this.id = seq++;
   }
 
-  log(msg: any) {
+  log(msg: unknown) {
     console.log(this.id + ' ' + msg);
   }
-  error(msg: any) {
+  error(msg: unknown) {
     console.error(msg);
   }
-  warn(msg: any) {
+  warn(msg: unknown) {
     console.warn(msg);
   }
 }

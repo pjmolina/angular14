@@ -27,9 +27,9 @@ export enum Roles {
   // providers: [LoggerService],  // si inyectamos el servicio aqui -> hay uca copia de ca servcio por componente
 })
 export class UserProfileComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() firstName: string = '';
-  @Input() lastName: string = '';
-  @Input() role: string = '';
+  @Input() firstName = '';
+  @Input() lastName = '';
+  @Input() role = '';
 
   @Output() selected = new EventEmitter<User>();
 

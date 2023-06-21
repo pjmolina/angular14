@@ -12,7 +12,7 @@ export class PlanetService {
   constructor(private http: HttpClient) {}
 
   /** Devuelve una listado de planetas (pagina N) */
-  getPlanets(n: number = 1): Observable<Planet[]> {
+  getPlanets(n = 1): Observable<Planet[]> {
     const url = `https://swapi.dev/api/planets/?page=${n}`;
 
     return this.http

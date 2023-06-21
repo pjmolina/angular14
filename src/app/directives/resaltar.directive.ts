@@ -4,7 +4,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
   selector: '[appResaltar]'
 })
 export class ResaltarDirective implements OnInit {
-  @Input() appResaltar: string = 'yellow';
+  @Input() appResaltar = 'yellow';
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
     // Renderer 1

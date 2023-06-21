@@ -1,9 +1,9 @@
 <div class="planet-list">
   <h2>Listado de planetas ({{ planets.length }} planetas)</h2>
   <div *ngFor="let p of planets">
-    <label>{{ p.name }}</label
+    <span>{{ p.name }}</span
     >&nbsp;
-    <label>{{ p.climate }}</label>
+    <span>{{ p.climate }}</span>
     ...
   </div>
   <div *ngIf="error" class="error">{{ error }}</div>

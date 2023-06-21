@@ -7,9 +7,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PlanetListComponent } from './planet/planet-list/planet-list.component';
+import { ResaltarDirective } from './directives/resaltar.directive';
 
 @NgModule({
-  declarations: [AppComponent, UserProfileComponent, PlanetListComponent],
+  declarations: [AppComponent, UserProfileComponent, PlanetListComponent, ResaltarDirective],
   imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [
     // LoggerService, // 1. te pida LoggerService -> LoggerService

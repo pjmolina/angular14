@@ -12,7 +12,7 @@ describe('PlanetService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: HttpClient, useClass: HttpClientMock }],
+      providers: [{ provide: HttpClient, useClass: HttpClientMock }]
     });
     service = TestBed.inject(PlanetService);
   });

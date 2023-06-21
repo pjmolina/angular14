@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, concatMap, map } from 'rxjs';
 import { DataPage } from '../domain/data-page';
+import { Person, PersonDto } from '../domain/person';
 import { Planet, PlanetDto } from '../domain/planet';
 
 @Injectable({
@@ -26,8 +27,76 @@ export class PlanetService {
         })
       );
   }
+
+  getPlanet(id: number): Observable<Planet> {
+    const url = `https://swapi.dev/api/planets/${id}`;
+
+    return this.http
+      .get<PlanetDto>(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .pipe(
+        map((resp) => {
+          return toPlanet(resp);
+        })
+      );
+  }
+  getPerson(id: number): Observable<Person> {
+    const url = `https://swapi.dev/api/people/${id}`;
+
+    return this.http
+      .get<PersonDto>(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .pipe(
+        map((resp) => {
+          return toPerson(resp);
+        })
+      );
+  }
+
+  getCompuesto(planeId: number): Observable<Compuesto> {
+    let planet: Planet;
+
+    return this.getPlanet(planeId).pipe(
+      concatMap((p) => {
+        const personasIds = p.residents.map((it) =>
+          parseInt(
+            it.replace('https://swapi.dev/api/people/', '').replace('/', ''),
+            10
+          )
+        );
+        planet = p;
+        const persona2 = personasIds[1];
+
+        return this.getPerson(persona2);
+      }),
+      map((person) => {
+        return { planet: planet, person: person } as Compuesto;
+      })
+    );
+  }
+
   //  HTTP   ---A--|
   //   WS    --A-B----c---D----|
+}
+
+export interface Compuesto {
+  planet: Planet;
+  person: Person;
+}
+
+function toPerson(dto: PersonDto): Person {
+  return {
+    name: dto.name,
+    hairColor: dto.hair_color,
+    height: parseInt(dto.height, 10),
+    mass: parseInt(dto.mass, 10),
+  } as Person;
 }
 
 function toPlanet(dto: PlanetDto): Planet {
@@ -65,7 +134,7 @@ function toPlanet(dto: PlanetDto): Planet {
       getPerson()     Observable(Person[])
          getSpaceship()  Observable(Spaceship[])
 
-     getPlanets().concatMap(p =>   getPerson()).concatMap().getPerson().
+     getPlanets().concatMap(p =>   getPerson()).concatMap().getSpaceship().
 
      subscribe(next: (data) => p, p, n)
 

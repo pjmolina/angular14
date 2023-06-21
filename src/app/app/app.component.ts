@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { concatMap, map } from 'rxjs';
+import { Planet } from '../domain/planet';
 import { LoggerService } from '../services/logger.service';
+import { Compuesto, PlanetService } from '../services/planet.service';
 import { User } from '../user-profile/user-profile.component';
 
 interface Persona {
@@ -15,6 +18,7 @@ interface Persona {
 })
 export class AppComponent implements OnInit {
   title = 'mi aplicacion 23';
+  objeto: any = null;
 
   personas: Persona[] = [
     {
@@ -34,7 +38,10 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  constructor(private logger: LoggerService) {
+  constructor(
+    private logger: LoggerService,
+    private planetService: PlanetService
+  ) {
     this.logger.log('1. appcomponent constructor');
   }
 
@@ -47,4 +54,82 @@ export class AppComponent implements OnInit {
       `AppComponent: Se ha seleccionado el usuario ${user.name} con rol: ${user.role}`
     );
   }
+
+  consultar1(): void {
+    this.planetService.getPlanet(1).subscribe({
+      next: (data) => {
+        this.objeto = data;
+      },
+    });
+  }
+  consultar2(): void {
+    this.planetService.getPerson(1).subscribe({
+      next: (data) => {
+        this.objeto = data;
+      },
+    });
+  }
+  consultar3(): void {
+    let planet: Planet;
+
+    this.planetService
+      .getPlanet(1)
+      .pipe(
+        concatMap((p) => {
+          const personasIds = p.residents.map((it) =>
+            parseInt(
+              it.replace('https://swapi.dev/api/people/', '').replace('/', ''),
+              10
+            )
+          );
+          planet = p;
+          const persona2 = personasIds[1];
+
+          return this.planetService.getPerson(persona2);
+        }),
+        map((person) => {
+          return { planet: planet, person: person } as Compuesto;
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.objeto = data;
+        },
+        error: (err) => {
+          this.objeto = { error: err };
+        },
+      });
+  }
+  consultar4(): void {
+    this.planetService
+      .getCompuesto(1)
+      // .pipe(
+      //   map((compuesto) => {
+      //     return compuesto.person.name;
+      //   })
+      // )
+      .subscribe({
+        next: (data) => {
+          this.objeto = data;
+        },
+        error: (err) => {
+          this.objeto = { error: err };
+        },
+      });
+  }
 }
+/*
+    Observable >
+      getPlanet()
+      concatMap. -> getPerson()
+      concatMap. -> getPerson()
+
+      --> .subscribe
+
+
+    Antipatron:
+    Observable > getPlanet().subscribe
+                  -> getPerson().subscribe
+                      -> getPerson().subscribe
+
+*/

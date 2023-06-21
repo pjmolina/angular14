@@ -1,10 +1,15 @@
 import { TestBed } from '@angular/core/testing';
+import { PlanetListComponent } from '../planet/planet-list/planet-list.component';
+import { PlanetService } from '../services/planet.service';
 import { AppComponent } from './app.component';
+
+class PlanetServiceMock {}
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, PlanetListComponent],
+      providers: [{ provide: PlanetService, useClass: PlanetServiceMock }],
     })
   );
 

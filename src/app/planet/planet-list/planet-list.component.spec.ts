@@ -4,8 +4,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { Planet } from 'src/app/domain/planet';
+import { FilterPlanetPipe } from 'src/app/pipes/filter-planet.pipe';
 import { PlanetService } from 'src/app/services/planet.service';
 import { PlanetListComponent } from './planet-list.component';
 
@@ -26,7 +28,8 @@ describe('PlanetListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PlanetListComponent],
+      declarations: [PlanetListComponent, FilterPlanetPipe],
+      imports: [FormsModule],
       providers: [
         { provide: PlanetService, useClass: PlanetServiceMock },
         { provide: HttpClient, useClass: HttpClientMock }

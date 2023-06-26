@@ -1,6 +1,15 @@
 <div class="planet-list">
+  <div class="filter">
+    <label for="search">Filtro:</label>
+    <input
+      id="search"
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="escribe para filtrar"
+    />
+  </div>
   <h2>Listado de planetas ({{ planets.length }} planetas)</h2>
-  <div *ngFor="let p of planets">
+  <div *ngFor="let p of planets | filterPlanet : searchText">
     <span>{{ p.name }}</span
     >&nbsp;
     <span>{{ p.climate }}</span>

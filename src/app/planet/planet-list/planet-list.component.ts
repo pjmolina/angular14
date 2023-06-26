@@ -7,12 +7,13 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-planet-list',
   templateUrl: './planet-list.component.html',
-  styleUrls: ['./planet-list.component.scss'],
+  styleUrls: ['./planet-list.component.scss']
 })
 export class PlanetListComponent implements OnInit, OnDestroy {
   planets: Planet[] = [];
   error = '';
   private sub?: Subscription;
+  searchText = '';
 
   constructor(private planetService: PlanetService) {}
 
@@ -26,7 +27,7 @@ export class PlanetListComponent implements OnInit, OnDestroy {
         // http 1 / complete   (cierre implicito)
         // ws   N .... abierto (cierre expreso)
         console.log('Obsevable completado');
-      },
+      }
     });
   }
 

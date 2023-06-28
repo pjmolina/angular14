@@ -1,1 +1,21 @@
 <h1>Bienviendo a la aplicacion</h1>
+
+<select
+  [(ngModel)]="estado.provinciaSeleccionada"
+  [ngModelOptions]="{ standalone: true }"
+>
+  <option [ngValue]="provincia" *ngFor="let provincia of provincias">
+    {{ provincia }}
+  </option>
+</select>
+
+<select
+  [(ngModel)]="estado.poblacionSeleccionada"
+  [ngModelOptions]="{ standalone: true }"
+>
+  <option [ngValue]="poblacion" *ngFor="let poblacion of poblaciones">
+    {{ poblacion }}
+  </option>
+</select>
+
+{{ estado | json }}

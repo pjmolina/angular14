@@ -18,9 +18,14 @@ export const routes: Routes = [
   { path: 'inicio', component: WelcomeComponent },
   { path: 'home', component: WelcomeComponent },
   { path: 'planetas', component: PlanetListComponent },
-  { path: 'planetas/:id', component: PlanetDetailComponent },
+  { path: 'planetas/:id/:color', component: PlanetDetailComponent },
   { path: 'acerca-de', component: AboutComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
 // export const rootRoutes = RouterModule.forRoot(routes);
+
+/*
+       https://acme.com:123/ciudades/:provinciaId?pagina=10&q=z
+
+*/

@@ -11,6 +11,8 @@ import { PlanetService } from 'src/app/services/planet.service';
 export class PlanetDetailComponent implements OnInit, OnDestroy {
   planet?: Planet = undefined;
   sub?: Subscription;
+  sub2?: Subscription;
+  loading = false;
 
   constructor(
     private planetService: PlanetService,
@@ -20,15 +22,22 @@ export class PlanetDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('Init');
 
+    this.sub2 = this.route.queryParamMap.subscribe((queryParam) => {
+      console.log('queryparam: ', JSON.stringify(queryParam, null, 2));
+    });
+
     this.sub = this.route.paramMap
       .pipe(
         concatMap((pm) => {
+          this.loading = true;
           return this.getPlanetById(pm);
         })
+        // delay(5000)
       )
       .subscribe((planet) => {
         this.planet = planet;
         console.log('Actualizado el planeta a ', planet);
+        this.loading = false;
       });
   }
   ngOnDestroy(): void {
@@ -38,10 +47,19 @@ export class PlanetDetailComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
       this.sub = undefined;
     }
+    if (this.sub2) {
+      this.sub2.unsubscribe();
+      this.sub2 = undefined;
+    }
   }
 
   private getPlanetById(paramMap: ParamMap): Observable<Planet | undefined> {
     const id = paramMap.get('id');
+    const color = paramMap.get('color');
+
+    console.log('id', id);
+    console.log('color', color);
+
     if (id === null) {
       return of(undefined);
     } else {

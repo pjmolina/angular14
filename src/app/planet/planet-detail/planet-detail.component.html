@@ -1,13 +1,19 @@
-<div *ngIf="planet; else noPlanet" class="planet-detail">
-  <h1>{{ planet.name }}</h1>
-  <div>
-    <span>Clima: </span><span>{{ planet.climate }}:</span>
-  </div>
-  <div>
-    <span>Gravedad: </span><span>{{ planet.gravity }}:</span>
+<div *ngIf="!loading; else loadingTemplate">
+  <div *ngIf="planet; else noPlanet" class="planet-detail">
+    <h1>{{ planet.name }}</h1>
+    <div>
+      <span>Clima: </span><span>{{ planet.climate }}:</span>
+    </div>
+    <div>
+      <span>Gravedad: </span><span>{{ planet.gravity }}:</span>
+    </div>
   </div>
 </div>
 
 <ng-template #noPlanet>
-  <div>No data.</div>
+  <div>No data. El planeta indciado no existe. 404.</div>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <h1>Cargando.....</h1>
 </ng-template>

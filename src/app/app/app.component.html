@@ -1,31 +1,18 @@
-<h1 class="titular" appResaltar="orange">{{ title }}</h1>
-
-<p appResaltar="#0FF">Un parrafo: {{ 1 + 2 * 3 }}</p>
-
-<p>{{ dinero | currency : 'EUR' }}</p>
-
-<div>
-  <h2>Listado de personas</h2>
-  <app-user-profile
-    *ngFor="let p of personas"
-    [firstName]="p.firstName"
-    [lastName]="p.lastName"
-    [role]="p.role"
-    (selected)="onUserSelect($event)"
-  >
-  </app-user-profile>
-</div>
-
-<app-planet-list></app-planet-list>
-
-<button (click)="consultar1()">Consultar planeta</button>
-<button (click)="consultar2()">Consultar persona</button>
-<button (click)="consultar3()">Consultar la composicion</button>
-<button (click)="consultar4()">
-  Consultar la composicion refactorizada en servicio
-</button>
-<div>
-  <pre>
-    {{ objeto | json }}
-  </pre>
-</div>
+<header>
+  <h1 class="titular" appResaltar="orange">{{ title }}</h1>
+  <p appResaltar="#0FF">Un parrafo: {{ 1 + 2 * 3 }}</p>
+  <p>{{ dinero | currency : 'EUR' }}</p>
+  <nav>
+    <a [routerLink]="['/']">Inicio</a> |
+    <a [routerLink]="['/planetas']">Planetas</a> |
+    <a [routerLink]="['/planetas/1']">Planeta 1</a> |
+    <a [routerLink]="['/planetas', '2']">Planeta 2</a> |
+    <a [routerLink]="['/acerca-de']">Acerca de...</a>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer>
+  <p>(c) Acme 2023. v 1.2.3</p>
+</footer>

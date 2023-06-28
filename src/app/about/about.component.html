@@ -1,0 +1,11 @@
+<div>
+  <h2>Listado de personas</h2>
+  <app-user-profile
+    *ngFor="let p of personas"
+    [firstName]="p.firstName"
+    [lastName]="p.lastName"
+    [role]="p.role"
+    (selected)="onUserSelect($event)"
+  >
+  </app-user-profile>
+</div>

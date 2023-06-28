@@ -1,1 +1,13 @@
-<p>planet-detail works!</p>
+<div *ngIf="planet; else noPlanet" class="planet-detail">
+  <h1>{{ planet.name }}</h1>
+  <div>
+    <span>Clima: </span><span>{{ planet.climate }}:</span>
+  </div>
+  <div>
+    <span>Gravedad: </span><span>{{ planet.gravity }}:</span>
+  </div>
+</div>
+
+<ng-template #noPlanet>
+  <div>No data.</div>
+</ng-template>

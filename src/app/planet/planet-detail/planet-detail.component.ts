@@ -22,6 +22,9 @@ export class PlanetDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('Init');
 
+    const pm = this.route.snapshot.paramMap;
+    console.log('paramMap snapshot ', JSON.stringify(pm, null, 2));
+
     this.sub2 = this.route.queryParamMap.subscribe((queryParam) => {
       console.log('queryparam: ', JSON.stringify(queryParam, null, 2));
     });
